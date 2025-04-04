@@ -1,18 +1,19 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
   FileSearch,
-  Globe,
   Hourglass,
   PiggyBank,
   Scale,
   ShieldCheck,
-  Sparkles,
   Zap,
 } from "lucide-react";
-import Link from "next/link";
-import { Button, buttonVariants } from "./ui/button";
+import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 const features = [
   {
@@ -48,45 +49,41 @@ const features = [
   },
 ];
 
+function googleSignIn(): Promise<void> {
+  return new Promise((resolve) => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
+    resolve();
+  });
+}
+
 export function HeroSection() {
+  const mutation = useMutation({
+    mutationFn: googleSignIn,
+    onError: (error: Error) => {
+      toast.error(error.message);
+    },
+  });
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-background to-background/80">
       <div className="container px-4 md:px-6 flex flex-col items-center max-w-6xl mx-auto">
-        <Link
-          href={"/dashboard"}
-          className={cn(
-            buttonVariants({ variant: "outline", size: "sm" }),
-            "px-4 py-2 mb-4 rounded-full hidden md:flex"
-          )}
-        >
-          <span className="mr-3 hidden md:block">
-            <Sparkles className="size-3.5" />
-          </span>
-          Introducing Simple Metrics for your team
-        </Link>
         <div className="text-center mb-12 w-full">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl xl:text-6xl/none bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-4">
-            Revoltionzie Your Contracts
+            Revolutionize Your Contracts
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
             Harness the power of AI to analyze, understand, and optimize your
             contracts in no time.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex justify-center mb-12">
             <Button
               className="inline-flex items-center justify-center text-lg"
               size={"lg"}
+              onClick={() => mutation.mutate()}
+              disabled={mutation.isPending}
             >
-              Get Started
+              {mutation.isPending ? "Signing in..." : "Get Started"}
               <ArrowRight className="ml-2 size-5" />
-            </Button>
-            <Button
-              className="inline-flex items-center justify-center text-lg"
-              size={"lg"}
-              variant={"outline"}
-            >
-              Learn More
-              <Globe className="ml-2 size-5" />
             </Button>
           </div>
 
