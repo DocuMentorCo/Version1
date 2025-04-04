@@ -54,12 +54,7 @@ export function UserButton() {
                   <span>Dashboard</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href={"/dashboard/settings"}>
-                  <Icons.settings className="mr-2 size-4" />
-                  <span>Settings</span>
-                </Link>
-              </DropdownMenuItem>
+             
               <DropdownMenuItem onClick={handleLogout}>
                 <Icons.logout className="mr-2 size-4" />
                 <span>Logout</span>

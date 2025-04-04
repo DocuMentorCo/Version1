@@ -8,8 +8,7 @@ import { UserButton } from "./shared/user-button";
 
 const navItems: { name: string; href: string }[] = [
   { name: "Dashboard", href: "/dashboard" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "Privacy Policy", href: "/privacy" },
+
 ];
 
 export function Header() {
