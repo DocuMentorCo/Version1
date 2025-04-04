@@ -33,11 +33,6 @@ const SidebarContent = () => {
       label: "Results",
       href: "/dashboard/results",
     },
-    {
-      icon: Settings,
-      label: "Settings",
-      href: "/dashboard/settings",
-    },
   ];
 
   return (
