@@ -11,11 +11,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import "./config/passport";
 
-
-
 import authRoute from "./routes/auth";
-
-
 
 const app = express();
 
@@ -33,9 +29,6 @@ app.use(
 
 app.use(helmet());
 app.use(morgan("dev"));
-
-
-
 app.use(express.json());
 
 app.use(
@@ -56,8 +49,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRoute);
-
-
 
 const PORT = 8080;
 app.listen(PORT, () => {
