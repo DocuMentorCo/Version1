@@ -48,11 +48,26 @@ export const detectContractType = async (
   contractText: string
 ): Promise<string> => {
   const prompt = `
-    Analyze the following contract text and determine the type of contract it is.
-    Provide only the contract type as a single string (e.g., "Employment", "Non-Disclosure Agreement", "Sales", "Lease", etc.).
-    Do not include any additional explanation or text.
-
-    Contract text:
+  Analyze the following contract text snippet and determine the most specific and accurate type of contract or legal agreement it represents.
+  
+  Consider a wide range of possibilities, including (but not limited to) common examples like:
+  
+  *   **Employment & HR:** Employment Agreement, Independent Contractor Agreement, Consulting Agreement, Offer Letter, Non-Compete Agreement, Non-Solicitation Agreement, Confidentiality Agreement (NDA), Severance Agreement, Employee Handbook (if presented as binding terms)
+  *   **Business & Commercial:** Master Service Agreement (MSA), Service Agreement, Statement of Work (SOW), Partnership Agreement, Joint Venture Agreement, Franchise Agreement, Distribution Agreement, Reseller Agreement, Supply Agreement, Agency Agreement, Referral Agreement, Sponsorship Agreement, Memorandum of Understanding (MOU), Letter of Intent (LOI) (note if binding or non-binding if possible)
+  *   **Sales & Goods:** Sales Contract, Purchase Agreement, Bill of Sale, Purchase Order (if detailed terms make it a contract), Consignment Agreement, Warranty Agreement
+  *   **Real Estate:** Lease Agreement (Residential/Commercial), Sublease Agreement, Real Estate Purchase Agreement, Option Agreement, Mortgage Agreement, Deed of Trust, Easement Agreement
+  *   **Intellectual Property:** Software License Agreement (EULA/SaaS), Patent License Agreement, Trademark License Agreement, Copyright License Agreement, IP Assignment Agreement, Technology Transfer Agreement, Royalty Agreement
+  *   **Financial:** Loan Agreement, Promissory Note, Security Agreement, Investment Agreement (e.g., SAFE, Convertible Note, Subscription Agreement), Shareholder Agreement, Credit Agreement, Guaranty Agreement
+  *   **Web & Online:** Terms of Service (ToS), Terms and Conditions (T&C), Privacy Policy, User Agreement, Subscription Agreement, Acceptable Use Policy (AUP)
+  *   **Legal & Dispute:** Settlement Agreement, Release Agreement, Arbitration Agreement, Mediation Agreement, Power of Attorney
+  
+  **Instructions:**
+  1.  Read the provided text snippet carefully.
+  2.  Identify the primary legal purpose and relationship defined by the document.
+  3.  Output *only* the single, most fitting contract type name from the examples above or a similar specific legal document type.
+  4.  Examples of good, concise output: "Employment Agreement", "Software License Agreement", "Lease Agreement", "Master Service Agreement", "Terms of Service", "Loan Agreement".
+  5.  If the document does not appear to be a standard contract or agreement (e.g., it's an invoice, a letter, a memo, marketing material) or its specific type cannot be reasonably determined from the snippet, respond with the exact phrase: **Unknown Document Type**
+  6.  **CRITICAL:** Your response must contain *only* the determined type string (or "Unknown Document Type"). Do not include *any* other words, explanations, apologies, introductory phrases (like "The contract type is:", "Based on the text..."), or formatting (like markdown, quotes, or bullet points).
     ${contractText.substring(0, 2000)}
   `;
 

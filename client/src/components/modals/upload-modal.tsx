@@ -12,7 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { AnimatePresence, motion } from "framer-motion";
-import { Brain, FileText, Loader2, Sparkles, Trash } from "lucide-react";
+import { Brain, FileText, Loader2, Sparkles, Trash, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
@@ -39,7 +39,7 @@ export function UploadModal({
     "upload" | "detecting" | "confirm" | "processing" | "done"
   >("upload");
 
-  const { mutate: detectContractType } = useMutation({
+  const { mutate: detectContractType, isPending: isDetecting } = useMutation({
     mutationFn: async (file: File) => {
       const formData = new FormData();
       formData.append("contract", file);
@@ -128,7 +128,7 @@ export function UploadModal({
   };
 
   const handleAnalyzeContract = () => {
-    if (files.length > 0 && detectedType) {
+    if (files.length > 0 && detectedType && detectedType !== "Unknown Document Type") {
       setStep("processing");
       uploadFile({ file: files[0], contractType: detectedType });
     }
@@ -143,6 +143,7 @@ export function UploadModal({
   };
 
   const renderContent = () => {
+    const isUnknownType = detectedType === "Unknown Document Type";
     switch (step) {
       case "upload": {
         return (
@@ -162,7 +163,7 @@ export function UploadModal({
                   <FileText className="mx-auto size-16 text-primary" />
                 </motion.div>
                 <p className="mt-4 text-sm text-gray-600">
-                  Drag &apos;n&apos; drop some files here, or click to select
+                  Drag 'n' drop some files here, or click to select
                   files
                 </p>
                 <p className="bg-yellow-500/30 border border-yellow-500 border-dashed text-yellow-700 p-2 rounded mt-2">
@@ -221,7 +222,11 @@ export function UploadModal({
                 <p>Would you like to analyze this contract with our AI?</p>
               </div>
               <div className="flex space-x-4">
-                <Button onClick={handleAnalyzeContract}>
+                <Button
+                    onClick={handleAnalyzeContract}
+                    disabled={isUnknownType}
+                    title={isUnknownType ? "Analysis not available for Unknown Document Type" : ""}
+                >
                   Yes, I want to analyze it
                 </Button>
                 <Button
@@ -232,6 +237,14 @@ export function UploadModal({
                   No, Try another file
                 </Button>
               </div>
+                 {isUnknownType && (
+                   <Alert variant="destructive">
+                       <AlertCircle className="h-4 w-4" />
+                       <AlertTitle>Analysis not possible</AlertTitle>
+                       <AlertDescription>The document type is unknown. Analysis will not be performed.
+                       </AlertDescription>
+                   </Alert>
+                 )}
             </motion.div>
           </AnimatePresence>
         );
