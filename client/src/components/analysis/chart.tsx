@@ -49,7 +49,8 @@ export default function OverallScoreChart({
   } satisfies ChartConfig;
 
   return (
-    <div className="w-full h-48">
+    <div className="w-full h-48 relative" style={{ marginBottom: '-5rem', top: '-2rem' }}>
+      {/* Using inline styles for forceful positioning */}
       <ChartContainer
         config={chartConfig}
         className="mx-auto aspect-square max-h-[250px]"
