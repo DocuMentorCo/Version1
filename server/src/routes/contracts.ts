@@ -8,7 +8,6 @@ import {
   uploadMiddleware,
 } from "../controllers/contract.controller";
 import { handleErrors } from "../middleware/errors";
-
 const router = express.Router();
 
 router.post(
