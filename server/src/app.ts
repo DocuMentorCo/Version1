@@ -11,11 +11,10 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import "./config/passport";
 
-// routes
+
 import authRoute from "./routes/auth";
-// import contractsRoute from "./routes/contracts";
-// import paymentsRoute from "./routes/payments";
-// import { handleWebhook } from "./controllers/payment.controller";
+import contractsRoute from "./routes/contracts";
+
 
 const app = express();
 
@@ -34,11 +33,6 @@ app.use(
 app.use(helmet());
 app.use(morgan("dev"));
 
-// app.post(
-//   "/payments/webhook",
-//   express.raw({ type: "application/json" }),
-//   handleWebhook
-// );
 
 app.use(express.json());
 
@@ -60,8 +54,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRoute);
-// app.use("/contracts", contractsRoute);
-// app.use("/payments", paymentsRoute);
+app.use("/contracts", contractsRoute);
+
 
 const PORT = 8080;
 app.listen(PORT, () => {
