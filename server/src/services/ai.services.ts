@@ -3,7 +3,7 @@ import { getDocument } from "pdfjs-dist";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const AI_MODEL = "gemini-2.5-pro-exp-03-25";
-const genAI = new GoogleGenerativeAI("AIzaSyAsoxo8eH8A4cyex-49jXll8tUmEx5HKWY");
+const genAI = new GoogleGenerativeAI("AIzaSyCEebEqoE_w5or8A8kj01_eDnI3R7uDx1A");
 const aiModel = genAI.getGenerativeModel({ model: AI_MODEL });
 
 export const extractTextFromPDF = async (fileKey: string) => {

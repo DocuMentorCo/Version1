@@ -34,6 +34,4 @@ router.get("/logout", (req, res, next) => {
 });
 
 
-
 export default router;
-
