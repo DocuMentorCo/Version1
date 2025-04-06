@@ -23,6 +23,24 @@ Documentor makes this process **faster, safer, and smarter** by:
 [![Watch the demo](https://img.youtube.com/vi/9Avh8Zi-S7U/maxresdefault.jpg)](https://youtu.be/9Avh8Zi-S7U)
 
 
+## 🧰 Tech Stack
+
+### 🔙 Backend
+- **Node.js**, **Express.js** – Server and API logic  
+- **MongoDB** – Document storage  
+- **Gemini API** – AI-powered contract analysis  
+
+### 🛡️ Middleware & Authentication
+- **Passport.js** – Authentication middleware  
+- **Google OAuth** – Secure login with Google  
+- **Redis** – Session management & caching  
+
+### 🎨 Frontend
+- **TypeScript** – Strongly typed logic  
+- **Tailwind CSS** – Responsive UI design  
+- **PDF.js** – Client-side PDF text extraction 
+
+---
 ## ✨ How It Helps You
 
 - ✅ Minimizes human error and ensures no critical detail is missed  
