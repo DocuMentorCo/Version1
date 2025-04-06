@@ -20,7 +20,7 @@ Documentor makes this process **faster, safer, and smarter** by:
 
 ## 🎥 Demo Video
 
-[![Watch the demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://youtu.be/9Avh8Zi-S7U))
+[![Watch the demo](https://img.youtube.com/vi/9Avh8Zi-S7U/maxresdefault.jpg)](https://youtu.be/9Avh8Zi-S7U)
 
 
 ## ✨ How It Helps You
