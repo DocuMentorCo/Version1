@@ -17,7 +17,7 @@ const redis_1 = __importDefault(require("../config/redis"));
 const pdfjs_dist_1 = require("pdfjs-dist");
 const generative_ai_1 = require("@google/generative-ai");
 const AI_MODEL = "gemini-2.5-pro-exp-03-25";
-const genAI = new generative_ai_1.GoogleGenerativeAI("AIzaSyCEebEqoE_w5or8A8kj01_eDnI3R7uDx1A");
+const genAI = new generative_ai_1.GoogleGenerativeAI("AIzaSyBApINNFYEDMN9Gpcb-_6WqM1OTSgfwzww");
 const aiModel = genAI.getGenerativeModel({ model: AI_MODEL });
 const extractTextFromPDF = (fileKey) => __awaiter(void 0, void 0, void 0, function* () {
     try {
