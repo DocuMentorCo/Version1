@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "next.config.js",
+        "use": "@vercel/next"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/$1"
+      }
+    ],
+    "env": {
+      "NEXT_PUBLIC_API_URL": "https://version1-j6ybuv3sg-srishti-mangalams-projects.vercel.app/",
+      "NEXT_PUBLIC_APP_NAME": "MyApp"
+    },
+    "outputDirectory": "out"
+  }
+  
