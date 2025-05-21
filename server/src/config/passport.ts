@@ -1,13 +1,13 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import User, { IUser } from "../models/user.model";
+import User from "../models/user.model";
 
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      callbackURL: "/auth/google/callback",
+      callbackURL: `${process.env.SERVER_URL}/auth/google/callback`, // Must be absolute URL
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -35,6 +35,12 @@ passport.serializeUser((user: any, done) => {
 });
 
 passport.deserializeUser(async (id: string, done) => {
-  const user = await User.findById(id);
-  done(null, user);
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error as Error, null);
+  }
 });
+
+export default passport;
