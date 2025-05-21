@@ -56,6 +56,9 @@ app.use(passport.session());
 app.use("/auth", authRoute);
 app.use("/contracts", contractsRoute);
 
+app.get("/", (req, res) => {
+  res.send("✅ Backend is live and running!");
+});
 
 const PORT = 8080;
 app.listen(PORT, () => {
